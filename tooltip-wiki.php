@@ -69,7 +69,7 @@ class Tooltip_Wiki {
         wp_send_json_success( $return );
 
 
-    } // end function ajax_action()
+    } 
 
 
 }
