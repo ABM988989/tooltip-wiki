@@ -3,7 +3,6 @@
 Plugin Name: Tooltip Wiki - ABM
 Version: 1.0.0
 */
-
 class Tooltip_Wiki {
 
     public function __construct() {
@@ -15,6 +14,7 @@ class Tooltip_Wiki {
     }
 
     public function enqueue_scripts() {
+
         wp_register_script( 'tooltip-ajax-script', plugins_url( 'tooltip-wiki.js', __FILE__ ), array(), false, true );
         wp_localize_script( 'tooltip-ajax-script', 'readmelater_ajax', array(
             'ajax_url' => admin_url( 'admin-ajax.php' ),

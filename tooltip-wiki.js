@@ -8,6 +8,13 @@ let links = document.getElementsByClassName(classPost)[0].getElementsByTagName('
 // Loop through all the links, and add a mouse-event to them.
 for (const link of links){
     link.addEventListener('mouseenter', showTooltip);
+    link.addEventListener('mouseout', () => {
+
+        // Cancel for all other setTimeout.
+        clearTimeout(delayTimer);
+
+    });
+
 }
 
 // Set variable for setTimeout. 
@@ -40,10 +47,27 @@ function showTooltip(event) {
 
         let tooltipContainer = document.createElement('DIV');
         tooltipContainer.classList.add('tooltip-container');
+
+        
+        // Position Tooltip on Screen
+
+        // Y 
+        if ( ( window.innerHeight / 2 )  > event.clientY ) {
+            tooltipContainer.style.top = event.layerY + 'px';
+        } else {
+            tooltipContainer.style.top = event.layerY - 460 + 'px';
+        }
+
+        // X 
+        if ( ( window.innerWidth / 2 )  > event.clientX ) {
+             tooltipContainer.style.left = event.layerX + 'px';
+
+        } else {
+            tooltipContainer.style.left = event.layerX - 300 + 'px';
+        }
+
     
-        tooltipContainer.style.top = (event.pageY - 20 ) + 'px';
-        tooltipContainer.style.left = (event.pageX - 20 ) + 'px';
-    
+     
         // TEXT
         let tooltipText = document.createElement("A");
         tooltipText.classList.add('tooltip-text');
