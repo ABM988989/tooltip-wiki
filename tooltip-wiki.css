@@ -1,7 +1,7 @@
-.tooltip-container {
+.tooltip-main {
     position: absolute;
 }
-.tooltip-text {
+.tooltip-content {
     background: #ffffff;
     width: 300px;
     height: 460px;

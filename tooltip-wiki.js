@@ -39,41 +39,40 @@ function showTooltip(event) {
     clearTimeout(delayTimer);
 
     // Remove all existing Tooltips.
-    document.querySelectorAll('.tooltip-container').forEach( (tooltips) => tooltips.remove() );
+    document.querySelectorAll('.tooltip-main').forEach( (tooltips) => tooltips.remove() );
 
 
     delayTimer = setTimeout(() => {
 
 
-        let tooltipContainer = document.createElement('DIV');
-        tooltipContainer.classList.add('tooltip-container');
+        // Create Tooltip Main Element:
+        let tooltipMain = document.createElement('DIV');
+        tooltipMain.classList.add('tooltip-main');
 
         
-        // Position Tooltip on Screen
+        // Position Tooltip on Screen:
 
         // Y 
         if ( ( window.innerHeight / 2 )  > event.clientY ) {
-            tooltipContainer.style.top = event.layerY + 'px';
+            tooltipMain.style.top = event.layerY + 'px';
         } else {
-            tooltipContainer.style.top = event.layerY - 460 + 'px';
+            tooltipMain.style.top = event.layerY - 460 + 'px';
         }
 
         // X 
         if ( ( window.innerWidth / 2 )  > event.clientX ) {
-             tooltipContainer.style.left = event.layerX + 'px';
+            tooltipMain.style.left = event.layerX + 'px';
 
         } else {
-            tooltipContainer.style.left = event.layerX - 300 + 'px';
+            tooltipMain.style.left = event.layerX - 300 + 'px';
         }
-
     
      
-        // TEXT
-        let tooltipText = document.createElement("A");
-        tooltipText.classList.add('tooltip-text');
-        tooltipContainer.appendChild(tooltipText);
-    
-        document.getElementsByTagName('body')[0].appendChild(tooltipContainer);
+        // Create Tooltip Content Element
+        let tooltipContent = document.createElement("A");
+        tooltipContent.classList.add('tooltip-content');
+        tooltipMain.appendChild(tooltipContent);
+        document.getElementsByTagName('body')[0].appendChild(tooltipMain);
 
 
         // AJAX Request.
@@ -90,28 +89,33 @@ function showTooltip(event) {
         .then((response) => response.json())
         .then((response) => {
 
-            tooltipText.setAttribute('href', response.data.post_parmalink);
 
-            // Image
-            let tooltipImg = document.createElement("IMG");
-            tooltipImg.classList.add('tooltip-img');
-            tooltipImg.setAttribute('src', response.data.post_img);
-            tooltipText.appendChild(tooltipImg);
+            // Add Content to Tooltip Element:
 
-            // Title
-            let tooltipTitle = document.createElement("H3");
-            tooltipTitle.classList.add('tooltip-title');
-            let titlenode = document.createTextNode(response.data.post_title);
-            tooltipTitle.appendChild(titlenode);
-            tooltipText.appendChild(tooltipTitle);     
+                // href
+                tooltipContent.setAttribute('href', response.data.post_parmalink);
 
-            // node text
-            let textnode = document.createTextNode(response.data.post_contect);
-            tooltipText.appendChild(textnode);
+                // Image
+                let tooltipImg = document.createElement("IMG");
+                tooltipImg.classList.add('tooltip-img');
+                tooltipImg.setAttribute('src', response.data.post_img);
+                tooltipContent.appendChild(tooltipImg);
+
+                // Title
+                let tooltipTitle = document.createElement("H3");
+                tooltipTitle.classList.add('tooltip-title');
+                let titlenode = document.createTextNode(response.data.post_title);
+                tooltipTitle.appendChild(titlenode);
+                tooltipContent.appendChild(tooltipTitle);     
+
+                // node text
+                let textnode = document.createTextNode(response.data.post_contect);
+                tooltipContent.appendChild(textnode);
         
 
+
             // Add Event for Remove Tooltip on mouse leave tooltip.
-            tooltipContainer.addEventListener('mouseleave',(e) => { 
+            tooltipMain.addEventListener('mouseleave',(e) => { 
                 e.target.remove()
             });
     
