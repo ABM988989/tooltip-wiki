@@ -9,4 +9,6 @@ In order for the plugin to work properly, it is **important** to first check the
 The plugin is still in development. So that it has all the limitations.
 The plugin was developed by a beginner developer, so it is not the most perfect.
 If you want to continue developing it, we will be very grateful to you.
+
+
 ![Screenshot](https://github.com/ABM988989/tooltip-wiki/blob/master/tooltip.png?raw=true)
